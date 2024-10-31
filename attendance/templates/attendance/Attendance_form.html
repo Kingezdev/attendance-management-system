@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'attendance/style.css' %}">
+  <title>Attendance Management System</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Create Student Attendance</h1>
+
+    {% if request.user.is_authenticated %}
+    <p>Hello {{request.user}}</p>
+  
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" style="background-color: #0ba317; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">Logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}" style="background-color: #07a107; color: white; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">Login</a>
+    {% endif %}
+    <!-- Mark Attendance Form -->
+    <form id="attendanceForm" method="post">
+        {% csrf_token %}
+        <label for="matricNumber"><b>Matric Number:</b></label>
+        {{ form.matric_number }}
+
+        <label for="studentName"><b>Student Name:</b></label>
+        {{ form.student_name }}
+
+        <label for="status"><b>Status:</b></label>
+        {{ form.status }}
+
+        <button type="submit">Mark Attendance</button>
+    </form>
+
+    <!-- Button to View Attendance List -->
+    <div style="margin-top: 20px;">
+      <a href="{% url 'attendance:list_attendance' %}">
+        <button type="button">View Attendance List</button>
+      </a>
+    </div>
+
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+
+  </div>
+
+  <script src="{% static 'attendance/app.js' %}"></script>
+</body>
+</html>

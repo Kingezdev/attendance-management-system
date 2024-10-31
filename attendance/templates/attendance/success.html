@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Success Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        .proceed-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from anchor */
+            cursor: pointer;
+        }
+        .proceed-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>SUCCESSFUL</h1>
+    
+    <!-- Anchor tag styled as a button -->
+    <a href="{% url 'attendance:record_attendance' %}" class="proceed-button">Proceed</a>
+    
+</body>
+</html>

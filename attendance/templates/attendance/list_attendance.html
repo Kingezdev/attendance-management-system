@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attendance/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance List</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Matric Number</th>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_records %}
+                    <tr>
+                        <td>{{ record.matric_number }}</td>
+                        <td>{{ record.student_name }}</td>
+                        <td>{{ record.date }}</td>
+                        <td>{{ record.status }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No attendance records found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Button to download the attendance list -->
+        <form action="{% url 'attendance:download_attendance' %}" method="get">
+            <button type="submit">Download Attendance List</button>
+        </form>
+
+        <a href="{% url 'attendance:record_attendance' %}">Back to Record Attendance</a>
+    </div>
+</body>
+</html>
